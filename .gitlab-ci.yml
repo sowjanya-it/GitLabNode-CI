@@ -1,0 +1,31 @@
+stages:
+  - install
+  - test
+  - run
+
+# Install dependencies
+install_job:
+  stage: install
+  image: node:18
+  script:
+    - npm install
+
+# Test stage (basic check)
+test_job:
+  stage: test
+  image: node:18
+  script:
+    - node -v
+    - echo "No tests defined, pipeline running successfully"
+
+# Run application (for demo purpose)
+run_job:
+  stage: run
+  image: node:18
+  script:
+    - npm install
+    - node app.js &
+    - sleep 5
+    - echo "Application started on port 3000"
+  only:
+    - main
